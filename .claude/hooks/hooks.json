@@ -1,0 +1,9 @@
+{
+  "SessionStart": [
+    {
+      "type": "command",
+      "command": "${CLAUDE_PROJECT_DIR}/.claude/scripts/validate-env.sh",
+      "description": "Validate Godot development environment on session start"
+    }
+  ]
+}
