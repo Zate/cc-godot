@@ -2,9 +2,13 @@
   "name": "gd",
   "version": "1.0.0",
   "description": "Godot game development plugin for Claude Code with /gd:setup, /gd:init-game, /gd:run commands, game planning agent, and Godot expertise skill",
-  "author": "Your Name",
-  "homepage": "https://github.com/your-username/godot-claude-plugin",
-  "repository": "https://github.com/your-username/godot-claude-plugin",
+  "author": {
+    "name": "Zate",
+    "email": "zate75@gmail.com",
+    "url": "https://github.com/Zate"
+  },
+  "homepage": "https://github.com/Zate/cc-godot",
+  "repository": "https://github.com/Zate/cc-godot",
   "license": "MIT",
   "keywords": ["godot", "game-development", "gamedev", "mcp", "game-engine", "godot-engine"]
 }
