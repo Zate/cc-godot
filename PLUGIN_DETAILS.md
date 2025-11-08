@@ -8,23 +8,23 @@ This directory contains a Claude Code plugin designed to streamline Godot game d
 
 Custom slash commands for common Godot workflows:
 
-- **`/setup`** - Validates and configures the Godot development environment
+- **`/gd:setup`** - Validates and configures the Godot development environment
   - Detects Godot installation
   - Verifies Godot MCP server is built
   - Creates `.mcp.json` configuration
   - Provides guidance for missing dependencies
 
-- **`/init-game`** - Initializes a new game project with interactive planning
+- **`/gd:init-game`** - Initializes a new game project with interactive planning
   - Launches the game-planner agent
   - Creates project structure based on requirements
   - Sets up scenes and folders
   - Documents the project plan
 
-- **`/run`** - Quickly run the current Godot project
+- **`/gd:run`** - Quickly run the current Godot project
   - Uses MCP tools to launch the game
   - Displays debug output and errors
 
-- **`/stop`** - Stop the running Godot instance
+- **`/gd:stop`** - Stop the running Godot instance
 
 ### Agents (`agents/`)
 

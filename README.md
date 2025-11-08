@@ -1,30 +1,22 @@
-# Godot Game Development Template
+# Godot Development Plugin for Claude Code
 
-A comprehensive template repository for creating Godot games with Claude Code and the Godot MCP server. This template includes a full Claude Code plugin with commands, agents, skills, and hooks to streamline your game development workflow.
+A comprehensive Claude Code plugin for Godot game development with namespaced commands, intelligent agents, and automated environment setup.
 
 ## Features
 
-- **Interactive Project Setup** - Automated environment validation and MCP configuration
-- **Game Planning Agent** - AI-assisted game design and architecture planning
-- **Quick Commands** - Slash commands for common tasks (run, stop, init)
-- **Smart Assistance** - Godot expertise automatically available when needed
-- **Environment Validation** - Automatic checks on session start
-- **Best Practices** - Pre-configured folder structure and conventions
+- **🎮 Namespaced Commands** - `/gd:setup`, `/gd:init-game`, `/gd:run`, `/gd:stop`
+- **🤖 Game Planning Agent** - Interactive AI-assisted game design
+- **🧠 Godot Expertise Skill** - Automatic activation for Godot-specific questions
+- **🔧 Environment Validation** - Automatic checks on session start
+- **📦 MCP Integration** - Seamless integration with Godot MCP server
 
-## Quick Start
+## Installation
 
 ### Prerequisites
 
-1. **Godot Engine** (4.5.1+)
-   - Download from [godotengine.org](https://godotengine.org)
-   - macOS: Install to `/Applications/Godot.app`
-   - Linux/Windows: Install to standard location or add to PATH
-
-2. **Node.js** (18+)
-   - Required to run the Godot MCP server
-
-3. **Godot MCP Server**
-   - Clone and build at `~/projects/godot-mcp`
+1. **Godot Engine** (4.5.1+) - [Download](https://godotengine.org)
+2. **Node.js** (18+) - Required for Godot MCP server
+3. **Godot MCP Server** - Clone and build:
    ```bash
    git clone <godot-mcp-repo-url> ~/projects/godot-mcp
    cd ~/projects/godot-mcp
@@ -32,169 +24,211 @@ A comprehensive template repository for creating Godot games with Claude Code an
    npm run build
    ```
 
-4. **Claude Code**
-   - Install from [claude.com/code](https://claude.com/code)
+### Install the Plugin
 
-### Using This Template
+From your Godot project directory in Claude Code:
 
-1. **Clone the template repository**
+```bash
+/plugin add https://github.com/your-username/godot-claude-plugin
+```
+
+The plugin will be available with the namespace `/gd:*`
+
+## Quick Start
+
+1. **Open your Godot project in Claude Code**
    ```bash
-   git clone <this-repo-url> my-awesome-game
-   cd my-awesome-game
-   ```
-
-2. **Open in Claude Code**
-   ```bash
+   cd my-godot-game
    claude .
    ```
 
-3. **Run the setup command**
+2. **Run setup to configure the environment**
    ```
-   /setup
-   ```
-   This will:
-   - Detect your Godot installation
-   - Verify the MCP server is built
-   - Create `.mcp.json` configuration
-   - Guide you through any missing steps
-
-4. **Restart Claude Code**
-   - Required for MCP server changes to take effect
-
-5. **Initialize your game project**
-   ```
-   /init-game
+   /gd:setup
    ```
    This will:
-   - Ask you questions about your game
-   - Create a comprehensive game plan
-   - Set up project structure
-   - Create initial scenes
+   - Auto-detect Godot installation
+   - Verify Godot MCP server is built
+   - Create `.mcp.json` configuration in your project
+   - Validate everything is working
 
-6. **Start developing!**
+3. **Restart Claude Code** (required for MCP changes to take effect)
+
+4. **Initialize a new game (optional)**
    ```
-   /run    # Test your game
-   /stop   # Stop running game
+   /gd:init-game
+   ```
+   Launches an interactive planning agent that will:
+   - Ask about your game (2D/3D, genre, mechanics, etc.)
+   - Generate a comprehensive game design document
+   - Create project folder structure
+   - Set up initial scenes
+
+5. **Start developing!**
+   ```
+   /gd:run    # Test your game
+   /gd:stop   # Stop the game
    ```
 
 ## Available Commands
 
-- **`/setup`** - Configure Godot development environment
-- **`/init-game`** - Start a new game with interactive planning
-- **`/run`** - Launch the game for testing
-- **`/stop`** - Stop the running game
+| Command | Description |
+|---------|-------------|
+| `/gd:setup` | Configure Godot development environment and MCP server |
+| `/gd:init-game` | Interactive game planning and project initialization |
+| `/gd:run` | Launch the game for testing |
+| `/gd:stop` | Stop the running game instance |
 
 ## Plugin Components
 
-### Commands
-Slash commands for quick workflows (setup, init-game, run, stop)
+### Commands (`commands/`)
+Slash commands for common Godot workflows with the `/gd:` namespace.
 
-### Agents
-- **game-planner** - Interactive game design assistant
+### Agents (`agents/`)
+- **game-planner** - Interactive game design assistant that asks questions and creates comprehensive game plans
 
-### Skills
-- **godot-dev** - Godot Engine expertise (activates automatically)
+### Skills (`skills/`)
+- **godot-dev** - Godot Engine expertise that automatically activates when you ask Godot-related questions
 
-### Hooks
-- **SessionStart** - Validates environment on startup
+### Hooks (`hooks/`)
+- **SessionStart** - Validates your environment configuration when you start a Claude Code session
 
-See [.claude/README.md](.claude/README.md) for detailed plugin documentation.
+### Scripts (`scripts/`)
+- Helper bash scripts for environment validation and setup
+- Referenced by commands via `${CLAUDE_PLUGIN_ROOT}`
 
-## Project Structure
+## How It Works
 
-After running `/init-game`, your project will have:
+### Environment Setup
+The `/gd:setup` command:
+1. Checks for Godot installation at common locations (macOS, Linux, Windows)
+2. Verifies the Godot MCP server is built at `~/projects/godot-mcp`
+3. Creates `.mcp.json` in your project with correct paths
+4. If `.mcp.json` exists, validates the paths instead of recreating
 
-```
-my-game/
-├── .claude/              # Claude Code plugin
-├── project.godot         # Godot project file
-├── icon.svg             # Project icon
-├── .mcp.json            # MCP server configuration (gitignored)
-├── scenes/              # Game scenes
-│   ├── main/
-│   ├── ui/
-│   ├── characters/
-│   └── levels/
-├── scripts/             # GDScript files
-│   ├── autoload/
-│   ├── characters/
-│   └── systems/
-├── assets/              # Art, audio, etc.
-│   ├── sprites/
-│   ├── audio/
-│   └── fonts/
-└── resources/           # Godot resources
-    ├── materials/
-    └── animations/
-```
+### Game Planning
+The `/gd:init-game` command launches the game-planner agent which:
+1. Asks about game type (2D/3D), genre, art style
+2. Gathers core mechanics and technical requirements
+3. Generates a detailed game design document
+4. Creates project structure (scenes/, scripts/, assets/, resources/)
+5. Sets up initial scenes based on your game type
 
-## Working with Godot & Claude Code
+### Automatic Assistance
+The godot-dev skill automatically activates when you:
+- Ask about Godot features ("How do I add a sprite?")
+- Need help with GDScript ("How do I implement player movement?")
+- Want project organization advice ("What's the best folder structure?")
+
+## Working with the Plugin
 
 ### Creating Scenes
-Ask Claude to create scenes and it will use the Godot MCP tools:
+Just ask Claude and it will use the Godot MCP tools:
 ```
-Create a player character scene with a sprite and collision shape
+Create a player character scene with Sprite2D and CollisionShape2D
 ```
 
 ### Adding Features
-Claude understands Godot concepts and can help implement features:
 ```
 Add a jump mechanic to my player character
-Create a health system with UI display
-Implement enemy AI with pathfinding
+Implement a health system with UI
+Create an enemy AI that follows the player
 ```
 
 ### Getting Help
-The godot-dev skill automatically activates for Godot questions:
 ```
 How do I make my camera follow the player smoothly?
-What's the best way to organize my game scenes?
-How do I handle input in Godot?
+What node types should I use for a 2D platformer?
+How do I handle collision detection in Godot?
 ```
 
-### Running Your Game
-Use `/run` to quickly test changes, `/stop` to close the game window.
+## Configuration
 
-## Customization
+### MCP Server
+The plugin expects the Godot MCP server at:
+```
+~/projects/godot-mcp/build/index.js
+```
 
-### Modify Commands
-Edit files in `.claude/commands/` to customize workflows.
+The `/gd:setup` command will create `.mcp.json` in your project:
+```json
+{
+  "mcpServers": {
+    "godot": {
+      "command": "node",
+      "args": ["/path/to/godot-mcp/build/index.js"],
+      "env": {
+        "GODOT_PATH": "/path/to/Godot"
+      }
+    }
+  }
+}
+```
 
-### Add New Skills
-Create new skills in `.claude/skills/` for specialized knowledge.
-
-### Configure Hooks
-Modify `.claude/hooks/hooks.json` to add automation.
-
-See the [plugin documentation](.claude/README.md) for details.
+### Customization
+You can modify the plugin by editing files in the plugin directory and restarting Claude Code.
 
 ## Troubleshooting
 
 ### "MCP server not configured"
-Run `/setup` to configure the environment. Make sure the Godot MCP server is built at `~/projects/godot-mcp`.
+Run `/gd:setup` to configure the environment. Make sure:
+- Godot is installed
+- MCP server is built at `~/projects/godot-mcp`
 
-### MCP tools not available after setup
-Restart Claude Code for MCP server changes to take effect.
+### MCP tools not available
+Restart Claude Code after running `/gd:setup`
 
 ### Commands not appearing
-Restart Claude Code after modifying command files.
+Make sure the plugin is installed:
+```
+/plugin list
+```
 
 ### Godot not detected
-Make sure Godot is installed at a standard location or set the `GODOT_PATH` environment variable.
+Install Godot at a standard location or set `GODOT_PATH` environment variable.
 
-## Learn More
+## Development
 
-- [Godot Documentation](https://docs.godotengine.org)
-- [Claude Code Documentation](https://docs.claude.com/claude-code)
-- [Plugin Documentation](.claude/README.md)
+### Plugin Structure
+```
+godot-claude-plugin/
+├── .claude-plugin/
+│   └── plugin.json          # Plugin metadata
+├── commands/                 # Slash commands
+│   ├── setup.md
+│   ├── init-game.md
+│   ├── run.md
+│   └── stop.md
+├── agents/                   # Custom agents
+│   └── game-planner.md
+├── skills/                   # Agent skills
+│   └── godot-dev/
+│       └── SKILL.md
+├── hooks/                    # Event hooks
+│   └── hooks.json
+├── scripts/                  # Helper scripts
+│   ├── validate-env.sh
+│   ├── setup-mcp.sh
+│   └── init-project.sh
+└── .mcp.json.template       # MCP configuration template
+```
+
+### Contributing
+Contributions welcome! Please:
+1. Fork the repository
+2. Create a feature branch
+3. Test thoroughly in a real Godot project
+4. Submit a pull request
 
 ## License
 
-MIT License - Feel free to use this template for any project!
+MIT License - See LICENSE file for details
 
-## Contributing
+## Links
 
-Improvements to this template are welcome! Please submit issues or pull requests.
+- [Godot Engine](https://godotengine.org)
+- [Claude Code Documentation](https://docs.claude.com/claude-code)
+- [Godot MCP Server](https://github.com/your-username/godot-mcp)
 
 ---
 
