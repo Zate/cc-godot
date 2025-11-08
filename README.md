@@ -26,13 +26,24 @@ A comprehensive Claude Code plugin for Godot game development with namespaced co
 
 ### Install the Plugin
 
-From your Godot project directory in Claude Code:
+1. **Add the Godot Game Development marketplace**
 
-```bash
-/plugin add https://github.com/your-username/godot-claude-plugin
-```
+   From Claude Code in any directory:
+   ```
+   /plugin marketplace add https://github.com/your-username/godot-claude-plugin
+   ```
 
-The plugin will be available with the namespace `/gd:*`
+   Or for local development:
+   ```
+   /plugin marketplace add /absolute/path/to/godot-claude-plugin
+   ```
+
+2. **Install the plugin**
+   ```
+   /plugin install gd@godot-gamedev
+   ```
+
+   The plugin will be available with the namespace `/gd:*`
 
 ## Quick Start
 

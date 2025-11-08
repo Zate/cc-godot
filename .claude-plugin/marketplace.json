@@ -1,0 +1,16 @@
+{
+  "name": "godot-gamedev",
+  "owner": {
+    "name": "Your Name",
+    "email": "your.email@example.com"
+  },
+  "plugins": [
+    {
+      "name": "gd",
+      "source": "./plugins/gd",
+      "description": "Godot game development plugin with /gd:setup, /gd:init-game, /gd:run commands and more",
+      "category": "development",
+      "tags": ["godot", "game-development", "gamedev", "game-engine"]
+    }
+  ]
+}
