@@ -1,11 +1,14 @@
 {
-  "description": "Godot development environment validation",
   "hooks": {
     "SessionStart": [
       {
-        "type": "command",
-        "command": "${CLAUDE_PLUGIN_ROOT}/scripts/validate-env.sh",
-        "description": "Validate Godot development environment on session start"
+        "description": "Validate Godot development environment on session start",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/validate-env.sh"
+          }
+        ]
       }
     ]
   }
